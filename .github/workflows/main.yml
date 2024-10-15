@@ -16,17 +16,17 @@ jobs:
       uses: actions/checkout@v2
       with:
         # プロジェクトのパスを指定してクローン
-        path: /home/d-nak/Desktop/08-Actions
+        path: /home/d-nak/miatiadev/08-Actions
 
     # 依存関係のインストール
     - name: Install dependencies
       run: |
-        cd /home/d-nak/Desktop/08-Actions
+        cd /home/d-nak/miatiadev/08-Actions
         npm install
     
     # サーバーの再起動
     - name: Restart server using pm2
       run: |
-        cd /home/d-nak/Desktop/08-Actions
+        cd /home/d-nak/miatiadev/08-Actions
         pm2 stop server || true
         pm2 start server
