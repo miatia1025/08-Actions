@@ -21,7 +21,7 @@ jobs:
         key: ${{ secrets.SECRET_SSHKEY }}
         passphrase: ${{ secrets.SECRET_PASSPHRASE }}
         script: |
-          cd /path/to/project/on/test-server
+          cd /home/d-nak/Desktop/08-Actions
           git pull origin main
           npm install
           pm2 stop server
