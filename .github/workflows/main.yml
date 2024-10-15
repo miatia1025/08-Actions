@@ -19,6 +19,7 @@ jobs:
         host: ${{ secrets.SECRET_HOST }}
         username: ${{ secrets.SECRET_USER }}
         key: ${{ secrets.SECRET_SSHKEY }}
+        passphrase: ${{ secrets.SECRET_PASSPHRASE }}
         script: |
           cd /path/to/project/on/test-server
           git pull origin main
