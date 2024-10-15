@@ -16,9 +16,9 @@ jobs:
     - name: SSH to Test Server and Pull Changes
       uses: appleboy/ssh-action@v0.1.1
       with:
-        host: ${{ secrets.TEST_SERVER_HOST }}
-        username: ${{ secrets.TEST_SERVER_USER }}
-        key: ${{ secrets.TEST_SERVER_SSH_KEY }}
+        host: ${{ secrets.SECRET_HOST }}
+        username: ${{ secrets.SECRET_USER }}
+        key: ${{ secrets.SECRET_SSHKEY }}
         script: |
           cd /path/to/project/on/test-server
           git pull origin main
