@@ -1,4 +1,4 @@
-name: Deploy to Test Server
+name: Deploy to Self-hosted Runner
 
 on:
   push:
@@ -7,22 +7,26 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
+    # Self-hosted runnerを使用
+    runs-on: self-hosted
+    
     steps:
+    # GitHubリポジトリをクローン（actions-runnerではなく、プロジェクトフォルダに適用）
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: SSH to Test Server and Pull Changes
-      uses: appleboy/ssh-action@v0.1.1
       with:
-        host: ${{ secrets.SECRET_HOST }}
-        username: ${{ secrets.SECRET_USER }}
-        key: ${{ secrets.SECRET_SSHKEY }}
-        passphrase: ${{ secrets.SECRET_PASSPHRASE }}
-        script: |
-          cd /home/d-nak/Desktop/08-Actions
-          git pull origin main
-          npm install
-          pm2 stop server
-          pm2 start server
+        # プロジェクトのパスを指定してクローン
+        path: /home/d-nak/Desktop/08-Actions
+
+    # 依存関係のインストール
+    - name: Install dependencies
+      run: |
+        cd /home/d-nak/Desktop/08-Actions
+        npm install
+    
+    # サーバーの再起動
+    - name: Restart server using pm2
+      run: |
+        cd /home/d-nak/Desktop/08-Actions
+        pm2 stop server || true
+        pm2 start server
