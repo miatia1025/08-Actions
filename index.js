@@ -7,3 +7,7 @@ const port = 5000;
 app.listen(port, () => {
   console.log("Server up");
 });
+
+app.get("/", (req, res) => {
+  console.log("Get request");
+});
