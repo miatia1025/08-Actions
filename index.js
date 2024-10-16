@@ -10,4 +10,6 @@ app.listen(port, () => {
 
 app.get("/", (req, res) => {
   console.log("Get request");
+
+  res.send("Responce Send");
 });
