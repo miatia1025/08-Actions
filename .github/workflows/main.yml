@@ -3,30 +3,30 @@ name: Deploy to Self-hosted Runner
 on:
   push:
     branches:
-      - main  # このブランチにプッシュされたときに動作する
+      - main # このブランチにプッシュされたときに動作する
 
 jobs:
   deploy:
     # Self-hosted runnerを使用
     runs-on: self-hosted
-    
-    steps:
-    # GitHubリポジトリをクローン（actions-runnerではなく、プロジェクトフォルダに適用）
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      with:
-        # プロジェクトのパスを指定してクローン
-        path: /home/d-nak/miatiadev/08-Actions
 
-    # 依存関係のインストール
-    - name: Install dependencies
-      run: |
-        cd /home/d-nak/miatiadev/08-Actions
-        npm install
-    
-    # サーバーの再起動
-    - name: Restart server using pm2
-      run: |
-        cd /home/d-nak/miatiadev/08-Actions
-        pm2 stop server || true
-        pm2 start server
+    steps:
+      # GitHubリポジトリをクローン（actions-runnerではなく、プロジェクトフォルダに適用）
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          # プロジェクトのパスを指定してクローン
+          path: /home/d-nak/miatiadev/08-Actions
+
+      # 依存関係のインストール
+      - name: Install dependencies
+        run: |
+          cd /home/d-nak/miatiadev/08-Actions
+          npm install
+
+      # サーバーの再起動
+      - name: Restart server using pm2
+        run: |
+          cd /home/d-nak/miatiadev/08-Actions
+          pm2 stop dev || true
+          pm2 start npm --name dev -- run dev
