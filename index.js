@@ -9,7 +9,7 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-  console.log("Get request");
+  console.log("Send Get Request");
 
-  res.send("Responce Send");
+  res.send("Responce Received");
 });
